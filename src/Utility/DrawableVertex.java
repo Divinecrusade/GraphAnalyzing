@@ -13,8 +13,10 @@ public class DrawableVertex {
 
     public void draw(@NotNull Graphics2D gfx) {
         gfx.setColor(colour);
-        gfx.drawOval(vert.getPos().x, vert.getPos().y, radius, radius);
-        gfx.drawString(vert.getName(), vert.getPos().x, vert.getPos().y);
+        gfx.fillOval(vert.getPos().x - radius, vert.getPos().y - radius, radius * 2, radius * 2);
+
+        gfx.setColor(Color.BLACK);
+        gfx.drawString(vert.getName(), vert.getPos().x - radius, vert.getPos().y - radius);
     }
 
     public boolean isTheSame(IVertex other_vert) {
