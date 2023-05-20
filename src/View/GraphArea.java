@@ -10,12 +10,13 @@ import java.awt.*;
 import java.util.List;
 import java.util.Random;
 
-public class GraphArea extends JPanel {
+public class GraphArea extends JPanel implements IViewGraph {
     public GraphArea() {
         super();
         rnd = new Random();
     }
 
+    @Override
     public void addVertex(IVertex vert) {
         final int min_c  = 0;
         final int max_c  = 255 + 1;
@@ -27,6 +28,13 @@ public class GraphArea extends JPanel {
         verts.add(new DrawableVertex(vert, colour, radius));
     }
 
+    @Override
+    public void removeVertex(IVertex vert) {
+        //noinspection SuspiciousMethodCalls
+        verts.remove(vert);
+    }
+
+    @Override
     public void addPath(IPath path) {
         final Color colour = Color.BLACK;
         final int thickness = 4;
@@ -34,6 +42,13 @@ public class GraphArea extends JPanel {
         paths.add(new DrawablePath(path, colour, thickness));
     }
 
+    @Override
+    public void removePath(IPath path) {
+        //noinspection SuspiciousMethodCalls
+        paths.remove(path);
+    }
+
+    @Override
     public void paintComponent(Graphics gfx) {
         super.paintComponent(gfx);
         Graphics2D gfx2D = (Graphics2D) gfx;
