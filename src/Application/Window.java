@@ -13,7 +13,7 @@ public class Window extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         graphStruct = new Graph();
-        graphArea = new GraphArea(10, 4);
+        graphArea = new GraphArea(40, 4);
         handler = new Handler(graphStruct, graphArea);
 
         graphArea.InitListeners(handler);
