@@ -23,7 +23,7 @@ public class Window extends JFrame {
         setVisible(true);
     }
 
-    public static void main() {
+    public static void main(String[] args) {
         new Window();
     }
 
