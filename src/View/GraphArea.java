@@ -14,17 +14,19 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class GraphArea extends JPanel implements IViewGraph {
-    public GraphArea(@NotNull IHandler controller, int std_vert_radius, int std_path_thickness) {
+    public GraphArea(int std_vert_radius, int std_path_thickness) {
         super();
 
         rnd = new Random();
         this.std_vert_radius = std_vert_radius;
         this.std_path_thickness = std_path_thickness;
 
-        this.addMouseListener(controller.getMouseClickedAdapter());
-
         verts = new ArrayList<>();
         paths = new ArrayList<>();
+    }
+
+    public void InitListeners(@NotNull IHandler controller) {
+        this.addMouseListener(controller.getMouseClickedAdapter());
     }
 
     @Override
