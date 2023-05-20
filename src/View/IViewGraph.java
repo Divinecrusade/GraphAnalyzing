@@ -8,4 +8,7 @@ public interface IViewGraph {
     void removeVertex(IVertex vert);
     void addPath(IPath path);
     void removePath(IPath path);
+
+    int getVisualVertexRadius(IVertex vert);
+    int getVisualPathThickness(IPath path);
 }
