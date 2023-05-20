@@ -5,11 +5,11 @@ import Utility.DrawablePath;
 import Utility.DrawableVertex;
 import Utility.IPath;
 import Utility.IVertex;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 public class GraphArea extends JPanel implements IViewGraph {
@@ -78,7 +78,7 @@ public class GraphArea extends JPanel implements IViewGraph {
         }
     }
 
-    private DrawableVertex findVertex(IVertex vert) {
+    private @Nullable DrawableVertex findVertex(IVertex vert) {
         for (DrawableVertex dr_vert : verts) {
             if (dr_vert.isTheSame(vert)) {
                 return dr_vert;
@@ -88,7 +88,7 @@ public class GraphArea extends JPanel implements IViewGraph {
         return null;
     }
 
-    private DrawablePath findPath(IPath path) {
+    private @Nullable DrawablePath findPath(IPath path) {
         for (DrawablePath dr_path : paths) {
             if (dr_path.isTheSame(path)) {
                 return dr_path;
