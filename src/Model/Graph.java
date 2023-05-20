@@ -24,14 +24,11 @@ public class Graph implements IModel {
         return vert;
     }
 
-    public ArrayList<ArrayList<double>> getAdjacencyMatrix() {
-        ArrayList<ArrayList<double>> adjacencyMatrix = new ArrayList<>(vertexes.size());
-        for (ArrayList<double> row : adjacencyMatrix) {
-            row = new ArrayList<double>(vertexes.size());
-        }
+    public double[][] getAdjacencyMatrix() {
+        double[][] adjacencyMatrix = new double[vertexes.size()][vertexes.size()];
 
         for (NonOrientedPath path : paths) {
-            adjacencyMatrix.get(vertexes.indexOf(path.getBegin())).set(vertexes.indexOf(path.getEnd()), path.getDistance());
+            adjacencyMatrix[vertexes.indexOf(path.getBegin())][vertexes.indexOf(path.getEnd())] = path.getDistance();
         }
 
         return adjacencyMatrix;
