@@ -37,7 +37,10 @@ public class GraphArea extends JPanel implements IViewGraph {
         Color colour = new Color(rnd.nextInt(max_c - min_c) + min_c,
                                  rnd.nextInt(max_c - min_c) + min_c,
                                  rnd.nextInt(max_c - min_c) + min_c);
-        verts.add(new DrawableVertex(vert, colour, std_vert_radius));
+        DrawableVertex dr_vert = new DrawableVertex(vert, colour, std_vert_radius);
+        verts.add(dr_vert);
+        dr_vert.draw((Graphics2D) getGraphics());
+        revalidate();
     }
 
     @Override
