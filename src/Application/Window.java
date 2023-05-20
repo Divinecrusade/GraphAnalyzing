@@ -1,6 +1,6 @@
 package Application;
 
-import Control.Handler;
+import Control.GraphConstructor;
 import Model.Graph;
 import View.GraphArea;
 
@@ -16,9 +16,7 @@ public class Window extends JFrame {
 
         graphStruct = new Graph();
         graphArea = new GraphArea(new Font("serif", Font.BOLD, 16), 20, 4);
-        handler = new Handler(graphStruct, graphArea);
-
-        graphArea.InitListeners(handler);
+        graphConstructor = new GraphConstructor(graphStruct, graphArea, graphArea);
 
         this.add(graphArea);
 
@@ -31,6 +29,6 @@ public class Window extends JFrame {
 
     Graph graphStruct;
     GraphArea graphArea;
-    Handler handler;
+    GraphConstructor graphConstructor;
 
 }

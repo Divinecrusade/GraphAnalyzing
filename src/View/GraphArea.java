@@ -1,11 +1,9 @@
 package View;
 
-import Control.IHandler;
 import Utility.DrawablePath;
 import Utility.DrawableVertex;
 import Utility.IPath;
 import Utility.IVertex;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -24,10 +22,6 @@ public class GraphArea extends JPanel implements IViewGraph {
 
         verts = new ArrayList<>();
         paths = new ArrayList<>();
-    }
-
-    public void InitListeners(@NotNull IHandler controller) {
-        this.addMouseListener(controller.getMouseClickedAdapter());
     }
 
     @Override
