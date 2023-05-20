@@ -2,9 +2,10 @@ package Model;
 
 import Utility.IVertex;
 
-import java.util.List;
+import java.awt.*;
+import java.util.ArrayList;
 
 public interface IModel {
-    List<IVertex> getVertexes();
-    void createVertex(IVertex vert);
+    ArrayList<IVertex> getVertexes();
+    IVertex createVertex(String vert_name, Point vert_pos);
 }

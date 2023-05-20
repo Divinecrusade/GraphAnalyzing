@@ -3,7 +3,6 @@ package Control;
 import Model.IModel;
 import Utility.IPath;
 import Utility.IVertex;
-import Utility.StaticVertex;
 import View.IViewGraph;
 import org.jetbrains.annotations.NotNull;
 
@@ -55,9 +54,7 @@ public class Handler implements IHandler{
                         }
                         else {
                             String vert_name = JOptionPane.showInputDialog(new JFrame(),"Enter vertex name");
-                            StaticVertex new_vert = new StaticVertex(vert_name, new Point(e.getX(), e.getY()));
-                            //graphStruct.createVertex(new_vert);
-                            graphArea.addVertex(new_vert);
+                            graphArea.addVertex(graphStruct.createVertex(vert_name, new Point(e.getX(), e.getY())));
                         }
                     }
                 }
