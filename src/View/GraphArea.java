@@ -14,9 +14,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class GraphArea extends JPanel implements IViewGraph {
-    public GraphArea(int std_vert_radius, int std_path_thickness) {
+    public GraphArea(Font std_font, int std_vert_radius, int std_path_thickness) {
         super();
 
+        this.std_font = std_font;
         rnd = new Random();
         this.std_vert_radius = std_vert_radius;
         this.std_path_thickness = std_path_thickness;
@@ -37,7 +38,7 @@ public class GraphArea extends JPanel implements IViewGraph {
         Color colour = new Color(rnd.nextInt(max_c - min_c) + min_c,
                                  rnd.nextInt(max_c - min_c) + min_c,
                                  rnd.nextInt(max_c - min_c) + min_c);
-        DrawableVertex dr_vert = new DrawableVertex(vert, colour, std_vert_radius);
+        DrawableVertex dr_vert = new DrawableVertex(vert, colour, std_font, std_vert_radius);
         verts.add(dr_vert);
         dr_vert.draw((Graphics2D) getGraphics());
         revalidate();
@@ -109,8 +110,10 @@ public class GraphArea extends JPanel implements IViewGraph {
     }
 
     private final Random rnd;
+    private final Font   std_font;
     private final int std_vert_radius;
     private final int std_path_thickness;
+
 
     private final ArrayList<DrawableVertex> verts;
     private final ArrayList<DrawablePath>   paths;

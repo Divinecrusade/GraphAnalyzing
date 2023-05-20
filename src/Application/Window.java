@@ -1,9 +1,11 @@
 package Application;
+
 import Control.Handler;
 import Model.Graph;
 import View.GraphArea;
 
-import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.*;
 
 public class Window extends JFrame {
 
@@ -13,7 +15,7 @@ public class Window extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         graphStruct = new Graph();
-        graphArea = new GraphArea(40, 4);
+        graphArea = new GraphArea(new Font("serif", Font.BOLD, 16), 20, 4);
         handler = new Handler(graphStruct, graphArea);
 
         graphArea.InitListeners(handler);

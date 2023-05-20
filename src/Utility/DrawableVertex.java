@@ -5,18 +5,17 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 
 public class DrawableVertex {
-    public DrawableVertex(IVertex vert, Color colour, int radius) {
+    public DrawableVertex(IVertex vert, Color colour, Font font, int radius) {
         this.vert   = vert;
         this.colour = colour;
+        this.font   = font;
         this.radius = radius;
     }
 
     public void draw(@NotNull Graphics2D gfx) {
         gfx.setColor(colour);
         gfx.fillOval(vert.getPos().x - radius, vert.getPos().y - radius, radius * 2, radius * 2);
-
-        gfx.setColor(Color.BLACK);
-        gfx.drawString(vert.getName(), vert.getPos().x - radius, vert.getPos().y - radius);
+        gfx.drawString(vert.getName(), vert.getPos().x - radius, vert.getPos().y - radius - font.getSize() / 2);
     }
 
     public boolean isTheSame(IVertex other_vert) {
@@ -24,6 +23,7 @@ public class DrawableVertex {
     }
 
     public  Color   colour;
+    public  Font    font;
     public  int     radius;
     private final IVertex vert;
 }
