@@ -5,23 +5,26 @@ import Utility.DrawablePath;
 import Utility.DrawableVertex;
 import Utility.IPath;
 import Utility.IVertex;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class GraphArea extends JPanel implements IViewGraph {
-    public GraphArea(IHandler controller, int std_vert_radius, int std_path_thickness) {
+    public GraphArea(@NotNull IHandler controller, int std_vert_radius, int std_path_thickness) {
         super();
-        this.controller = controller;
 
         rnd = new Random();
         this.std_vert_radius = std_vert_radius;
         this.std_path_thickness = std_path_thickness;
 
         this.addMouseListener(controller.getMouseClickedAdapter());
+
+        verts = new ArrayList<>();
+        paths = new ArrayList<>();
     }
 
     @Override
@@ -99,12 +102,11 @@ public class GraphArea extends JPanel implements IViewGraph {
 
         return null;
     }
-    private final IHandler controller;
 
     private final Random rnd;
     private final int std_vert_radius;
     private final int std_path_thickness;
 
-    private List<DrawableVertex> verts;
-    private List<DrawablePath>   paths;
+    private final ArrayList<DrawableVertex> verts;
+    private final ArrayList<DrawablePath>   paths;
 }
