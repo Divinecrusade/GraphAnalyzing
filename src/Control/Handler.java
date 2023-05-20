@@ -55,7 +55,7 @@ public class Handler implements IHandler{
                     }
 
                     String vert_name = JOptionPane.showInputDialog(new JFrame(),"Enter vertex name");
-                    graphArea.addVertex(graphStruct.createVertex(vert_name, new Point(e.getX(), e.getY())));
+                    if (vert_name != null) graphArea.addVertex(graphStruct.createVertex(vert_name, new Point(e.getX(), e.getY())));
                 }
             }
         };
