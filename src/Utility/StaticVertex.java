@@ -2,7 +2,7 @@ package Utility;
 
 import java.awt.*;
 
-class StaticVertex implements IVertex {
+public class StaticVertex implements IVertex {
     public StaticVertex(String name, Point pos) {
         this.name = name;
         this.pos  = pos;

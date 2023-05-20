@@ -1,6 +1,6 @@
 package Utility;
 
-class NonOrientedPath implements IPath {
+public class NonOrientedPath implements IPath {
     public NonOrientedPath(IVertex vert1, IVertex vert2, double distance) {
         this.vert1 = vert1;
         this.vert2 = vert2;
