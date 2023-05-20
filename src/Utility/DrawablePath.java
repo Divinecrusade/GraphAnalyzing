@@ -21,6 +21,10 @@ public class DrawablePath {
                      Math.abs(path.getEnd().getPos().x - path.getBegin().getPos().x) / 2,
                      Math.abs(path.getEnd().getPos().y - path.getBegin().getPos().y) / 2);
     }
+
+    public boolean isTheSame(IPath other_path) {
+        return  path == other_path;
+    }
     public Color colour;
     public int thickness;
     private final IPath path;

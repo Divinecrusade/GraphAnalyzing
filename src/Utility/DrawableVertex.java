@@ -17,6 +17,10 @@ public class DrawableVertex {
         gfx.drawString(vert.getName(), vert.getPos().x, vert.getPos().y);
     }
 
+    public boolean isTheSame(IVertex other_vert) {
+        return  vert == other_vert;
+    }
+
     public  Color   colour;
     public  int     radius;
     private final IVertex vert;
