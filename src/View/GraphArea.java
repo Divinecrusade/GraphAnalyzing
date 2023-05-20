@@ -20,6 +20,8 @@ public class GraphArea extends JPanel implements IViewGraph {
         rnd = new Random();
         this.std_vert_radius = std_vert_radius;
         this.std_path_thickness = std_path_thickness;
+
+        this.addMouseListener(controller.getMouseClickedAdapter());
     }
 
     @Override
