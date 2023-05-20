@@ -11,7 +11,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class GraphArea extends JPanel implements IViewGraph {
+public class GraphArea extends JPanel implements IView {
     public GraphArea(Font std_font, int std_vert_radius, int std_path_thickness) {
         super();
 

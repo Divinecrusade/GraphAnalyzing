@@ -3,7 +3,7 @@ package View;
 import Utility.IPath;
 import Utility.IVertex;
 
-public interface IViewGraph {
+public interface IView {
     void addVertex(IVertex vert);
     void removeVertex(IVertex vert);
     void addPath(IPath path);

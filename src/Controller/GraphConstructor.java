@@ -1,9 +1,9 @@
-package Control;
+package Controller;
 
 import Model.IModel;
 import Utility.IPath;
 import Utility.IVertex;
-import View.IViewGraph;
+import View.IView;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -12,21 +12,21 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class GraphConstructor extends MouseAdapter {
-    public GraphConstructor(IModel graphStruct, IViewGraph graphArea, JComponent controller) {
+    public GraphConstructor(IModel graphStruct, IView graphArea, JComponent controller) {
         super();
         this.graphStruct = graphStruct;
         this.graphArea = graphArea;
         controller.addMouseListener(this);
     }
 
-    protected boolean isCollisedVertex(@NotNull Point pos, @NotNull IVertex vert) {
+    protected boolean isCollidedVertex(@NotNull Point pos, @NotNull IVertex vert) {
         final int vert_radius = graphArea.getVisualVertexRadius(vert);
 
         return pos.x >= vert.getPos().x - vert_radius && pos.x <= vert.getPos().x + vert_radius &&
                pos.y >= vert.getPos().y - vert_radius && pos.y <= vert.getPos().y + vert_radius;
     }
 
-    protected boolean isCollisedPath(Point pos, IPath path) {
+    protected boolean isCollidedPath(Point pos, IPath path) {
         return false;
     }
 
@@ -36,7 +36,7 @@ public class GraphConstructor extends MouseAdapter {
 
         if (SwingUtilities.isLeftMouseButton(e)) {
             for (IVertex vert : graphStruct.getVertexes()) {
-                if (isCollisedVertex(new Point(e.getX(), e.getY()), vert)) {
+                if (isCollidedVertex(new Point(e.getX(), e.getY()), vert)) {
                     return;
                 }
             }
@@ -47,5 +47,5 @@ public class GraphConstructor extends MouseAdapter {
     }
 
     protected final IModel graphStruct;
-    protected final IViewGraph graphArea;
+    protected final IView graphArea;
 }

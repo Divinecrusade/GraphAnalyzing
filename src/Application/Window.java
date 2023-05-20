@@ -1,6 +1,6 @@
 package Application;
 
-import Control.GraphConstructor;
+import Controller.GraphConstructor;
 import Model.Graph;
 import View.GraphArea;
 
