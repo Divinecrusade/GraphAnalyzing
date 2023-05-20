@@ -52,11 +52,10 @@ public class Handler implements IHandler{
                         if (isCollisedVertex(new Point(e.getX(), e.getY()), vert)) {
                             return;
                         }
-                        else {
-                            String vert_name = JOptionPane.showInputDialog(new JFrame(),"Enter vertex name");
-                            graphArea.addVertex(graphStruct.createVertex(vert_name, new Point(e.getX(), e.getY())));
-                        }
                     }
+
+                    String vert_name = JOptionPane.showInputDialog(new JFrame(),"Enter vertex name");
+                    graphArea.addVertex(graphStruct.createVertex(vert_name, new Point(e.getX(), e.getY())));
                 }
             }
         };
