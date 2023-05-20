@@ -22,8 +22,8 @@ public class GraphConstructor extends MouseAdapter {
     protected boolean isCollidedVertex(@NotNull Point pos, @NotNull IVertex vert) {
         final int vert_radius = graphArea.getVisualVertexRadius(vert);
 
-        return pos.x >= vert.getPos().x - vert_radius && pos.x <= vert.getPos().x + vert_radius &&
-               pos.y >= vert.getPos().y - vert_radius && pos.y <= vert.getPos().y + vert_radius;
+        return pos.x >= vert.getPos().x - 2 * vert_radius && pos.x <= vert.getPos().x + 2 * vert_radius &&
+               pos.y >= vert.getPos().y - 2 * vert_radius && pos.y <= vert.getPos().y + 2 * vert_radius;
     }
 
     protected boolean isCollidedPath(Point pos, IPath path) {
