@@ -50,7 +50,7 @@ public class GraphConstructor extends MouseAdapter {
                 }
             }
             String vert_name = JOptionPane.showInputDialog(new JFrame(),"Enter vertex name");
-            if (vert_name != null) graphArea.addVertex(graphStruct.createVertex(vert_name, mousePos));
+            if (vert_name != null && !vert_name.equals("")) graphArea.addVertex(graphStruct.createVertex(vert_name, mousePos));
         }
     }
 
