@@ -55,7 +55,7 @@ public class GraphConstructor extends MouseAdapter {
         else if (SwingUtilities.isRightMouseButton(e)) {
             for (IVertex vert : graphStruct.getVertexes()) {
                 if (isMouseOverVertex(mousePos, vert)) {
-                    graphStruct.removeVertex(vert);
+                    graphStruct.deleteVertex(vert);
                     graphArea.removeVertex(vert);
                     return;
                 }

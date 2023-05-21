@@ -56,7 +56,7 @@ public class Graph implements IModel {
         return path;
     }
     @Override
-    public void removeVertex(IVertex vert) {
+    public void deleteVertex(IVertex vert) {
          paths.removeIf(path -> path.getBegin() == vert || path.getEnd() == vert);
          vertexes.removeIf(old_vert -> old_vert.getName().equals(vert.getName()));
     }
