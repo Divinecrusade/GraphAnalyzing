@@ -83,10 +83,12 @@ public class GraphConstructor extends MouseAdapter {
                     if (selected_vertex != null && selected_vertex != vert) {
                         String distance = JOptionPane.showInputDialog(new JFrame(),"Enter path distance");
                         if (distance != null) {
-                            graphArea.addPath(graphStruct.createPath(selected_vertex, vert, Double.parseDouble(distance)));
-                        }
-                        else {
-                            graphArea.addPath(graphStruct.createPath(selected_vertex, vert));
+                            if (distance.equals("")) {
+                                graphArea.addPath(graphStruct.createPath(selected_vertex, vert));
+                            }
+                            else {
+                                graphArea.addPath(graphStruct.createPath(selected_vertex, vert, Double.parseDouble(distance)));
+                            }
                         }
                     }
                 }
