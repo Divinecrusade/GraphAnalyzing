@@ -70,16 +70,57 @@ public class GraphArea extends JPanel implements IView {
     }
 
     @Override
+    public void selectVertex(IVertex vert) {
+        selected_vert = findVertex(vert);
+
+        revalidate();
+        repaint();
+    }
+
+    @Override
+    public void selectTempPath(Point beg, Point end) {
+        tempPathBeg = beg;
+        tempPathEnd = end;
+
+        revalidate();
+        repaint();
+    }
+
+    @Override
+    public void deselectVertex() {
+        selected_vert = null;
+
+        revalidate();
+        repaint();
+    }
+
+    @Override
+    public void deselectTempPath() {
+        tempPathBeg = null;
+        tempPathEnd = null;
+        revalidate();
+        repaint();
+    }
+
+    @Override
     public void paintComponent(Graphics gfx) {
         super.paintComponent(gfx);
         Graphics2D gfx2D = (Graphics2D) gfx;
 
-        for (DrawableVertex vert : verts) {
-            vert.draw(gfx2D);
+        if (tempPathBeg != null && tempPathEnd != null) {
+            gfx2D.setColor(selection_colour);
+            gfx2D.setStroke(new BasicStroke(std_path_thickness));
+            gfx2D.drawLine(tempPathBeg.x, tempPathBeg.y, tempPathEnd.x, tempPathEnd.y);
         }
 
         for (DrawablePath path : paths) {
             path.draw(gfx2D);
+        }
+        for (DrawableVertex vert : verts) {
+            vert.draw(gfx2D);
+        }
+        if (selected_vert != null) {
+            selected_vert.drawBorder(gfx2D, selection_colour);
         }
     }
 
@@ -107,7 +148,12 @@ public class GraphArea extends JPanel implements IView {
     private final Font   std_font;
     private final int std_vert_radius;
     private final int std_path_thickness;
+    private final Color selection_colour = Color.RED;
 
+    private DrawableVertex selected_vert = null;
+
+    private Point tempPathBeg = null;
+    private Point tempPathEnd = null;
 
     private final ArrayList<DrawableVertex> verts;
     private final ArrayList<DrawablePath>   paths;

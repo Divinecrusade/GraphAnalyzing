@@ -20,6 +20,10 @@ public class DrawableVertex {
 
     public void draw(@NotNull Graphics2D gfx, Color border_colour) {
         draw(gfx);
+        drawBorder(gfx, border_colour);
+    }
+
+    public void drawBorder(@NotNull Graphics2D gfx, Color border_colour) {
         gfx.setColor(border_colour);
         gfx.drawOval(vert.getPos().x - radius, vert.getPos().y - radius, radius * 2, radius * 2);
     }

@@ -1,5 +1,6 @@
 package Model;
 
+import Utility.IPath;
 import Utility.IVertex;
 import Utility.NonOrientedPath;
 import Utility.StaticVertex;
@@ -22,6 +23,20 @@ public class Graph implements IModel {
         StaticVertex vert = new StaticVertex(vert_name, vert_pos);
         vertexes.add(vert);
         return vert;
+    }
+
+    @Override
+    public IPath createPath(IVertex beg, IVertex end, double distance) {
+        NonOrientedPath path = new NonOrientedPath(beg, end, distance);
+        paths.add(path);
+        return path;
+    }
+
+    @Override
+    public IPath createPath(IVertex beg, IVertex end) {
+        NonOrientedPath path = new NonOrientedPath(beg, end);
+        paths.add(path);
+        return path;
     }
 
     public double[][] getAdjacencyMatrix() {
