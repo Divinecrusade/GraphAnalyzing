@@ -49,7 +49,9 @@ public class GraphArea extends JPanel implements IView {
     public void addPath(IPath path) {
         final Color colour = Color.BLACK;
 
-        paths.add(new DrawablePath(path, colour, std_path_thickness));
+        if (path != null) {
+            paths.add(new DrawablePath(path, colour, std_path_thickness));
+        }
     }
 
     @Override

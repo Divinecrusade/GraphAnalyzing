@@ -27,6 +27,15 @@ public class Graph implements IModel {
 
     @Override
     public IPath createPath(IVertex beg, IVertex end, double distance) {
+        for (NonOrientedPath path : paths) {
+            if ((path.getBegin() == beg && path.getEnd() == end) ||
+                (path.getEnd() == beg && path.getBegin() == end)) {
+                path.updateDistance(distance);
+
+                return null;
+            }
+        }
+
         NonOrientedPath path = new NonOrientedPath(beg, end, distance);
         paths.add(path);
         return path;
