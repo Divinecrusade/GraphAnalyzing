@@ -18,6 +18,8 @@ public interface IView {
 
     void selectTempPath(Point beg, Point end);
 
-    void deselectVertex();
+    void deselectVertexes();
+
+    void deselectVertex(IVertex vert);
     void deselectTempPath();
 }

@@ -22,6 +22,7 @@ public class GraphArea extends JPanel implements IView {
 
         verts = new ArrayList<>();
         paths = new ArrayList<>();
+        selected_verts = new ArrayList<>();
     }
 
     @Override
@@ -71,7 +72,8 @@ public class GraphArea extends JPanel implements IView {
 
     @Override
     public void selectVertex(IVertex vert) {
-        selected_vert = findVertex(vert);
+        DrawableVertex dr_vert = findVertex(vert);
+        if (!selected_verts.contains(dr_vert)) selected_verts.add(dr_vert);
 
         revalidate();
         repaint();
@@ -87,8 +89,17 @@ public class GraphArea extends JPanel implements IView {
     }
 
     @Override
-    public void deselectVertex() {
-        selected_vert = null;
+    public void deselectVertexes() {
+        selected_verts.clear();
+
+        revalidate();
+        repaint();
+    }
+
+    @Override
+    public void deselectVertex(IVertex vert) {
+        DrawableVertex dr_vert = findVertex(vert);
+        selected_verts.remove(dr_vert);
 
         revalidate();
         repaint();
@@ -98,6 +109,7 @@ public class GraphArea extends JPanel implements IView {
     public void deselectTempPath() {
         tempPathBeg = null;
         tempPathEnd = null;
+
         revalidate();
         repaint();
     }
@@ -119,8 +131,8 @@ public class GraphArea extends JPanel implements IView {
         for (DrawableVertex vert : verts) {
             vert.draw(gfx2D);
         }
-        if (selected_vert != null) {
-            selected_vert.drawBorder(gfx2D, selection_colour);
+        for (DrawableVertex vert : selected_verts) {
+            vert.drawBorder(gfx2D, selection_colour);
         }
     }
 
@@ -150,11 +162,10 @@ public class GraphArea extends JPanel implements IView {
     private final int std_path_thickness;
     private final Color selection_colour = Color.RED;
 
-    private DrawableVertex selected_vert = null;
-
     private Point tempPathBeg = null;
     private Point tempPathEnd = null;
 
     private final ArrayList<DrawableVertex> verts;
     private final ArrayList<DrawablePath>   paths;
+    private final ArrayList<DrawableVertex> selected_verts;
 }

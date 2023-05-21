@@ -64,6 +64,7 @@ public class GraphConstructor extends MouseAdapter {
                 if (isMouseOverVertex(mousePos, vert)) {
                     if (selected_vertex == null) {
                         selected_vertex = vert;
+                        graphArea.selectVertex(selected_vertex);
                     }
                     return;
                 }
@@ -92,7 +93,8 @@ public class GraphConstructor extends MouseAdapter {
             }
 
             selected_vertex = null;
-            graphArea.deselectVertex();
+            pointed_vertex  = null;
+            graphArea.deselectVertexes();
             graphArea.deselectTempPath();
         }
     }
@@ -104,12 +106,18 @@ public class GraphConstructor extends MouseAdapter {
         if (SwingUtilities.isLeftMouseButton(e) && selected_vertex != null) {
             Point mousePos = new Point(e.getX(), e.getY());
             graphArea.selectTempPath(selected_vertex.getPos(), mousePos);
+            boolean mouseOverVertex = false;
             for (IVertex vert : graphStruct.getVertexes()) {
-                if (isMouseOverVertex(mousePos, vert)) {
-                    graphArea.deselectVertex();
+                if (isMouseOverVertex(mousePos, vert) && vert != selected_vertex) {
                     graphArea.selectVertex(vert);
+                    pointed_vertex = vert;
+                    mouseOverVertex = true;
+                    break;
                 }
-                return;
+            }
+            if (!mouseOverVertex) {
+                graphArea.deselectVertex(pointed_vertex);
+                pointed_vertex = null;
             }
         }
     }
@@ -117,4 +125,5 @@ public class GraphConstructor extends MouseAdapter {
     protected final IModel graphStruct;
     protected final IView graphArea;
     private IVertex selected_vertex = null;
+    private IVertex pointed_vertex  = null;
 }
