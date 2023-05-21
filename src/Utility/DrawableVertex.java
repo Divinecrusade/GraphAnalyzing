@@ -18,6 +18,12 @@ public class DrawableVertex {
         gfx.drawString(vert.getName(), vert.getPos().x - radius, vert.getPos().y - radius - font.getSize() / 2);
     }
 
+    public void draw(@NotNull Graphics2D gfx, Color border_colour) {
+        draw(gfx);
+        gfx.setColor(border_colour);
+        gfx.drawOval(vert.getPos().x - radius, vert.getPos().y - radius, radius * 2, radius * 2);
+    }
+
     public boolean isTheSame(IVertex other_vert) {
         return  vert == other_vert;
     }
