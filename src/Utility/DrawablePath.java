@@ -34,6 +34,10 @@ public class DrawablePath {
     public boolean isTheSame(IPath other_path) {
         return  path == other_path;
     }
+
+    public boolean isConnectedWith(IVertex vert) {
+        return path.getBegin() == vert || path.getEnd() == vert;
+    }
     public Color colour;
     public int thickness;
     private final IPath path;

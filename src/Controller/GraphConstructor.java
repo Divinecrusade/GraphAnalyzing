@@ -42,8 +42,8 @@ public class GraphConstructor extends MouseAdapter {
     public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
 
+        Point mousePos = new Point(e.getX(), e.getY());
         if (SwingUtilities.isLeftMouseButton(e)) {
-            Point mousePos = new Point(e.getX(), e.getY());
             for (IVertex vert : graphStruct.getVertexes()) {
                 if (isCollidedVertex(mousePos, vert)) {
                     return;
@@ -51,6 +51,15 @@ public class GraphConstructor extends MouseAdapter {
             }
             String vert_name = JOptionPane.showInputDialog(new JFrame(),"Enter vertex name");
             if (vert_name != null && !vert_name.equals("")) graphArea.addVertex(graphStruct.createVertex(vert_name, mousePos));
+        }
+        else if (SwingUtilities.isRightMouseButton(e)) {
+            for (IVertex vert : graphStruct.getVertexes()) {
+                if (isMouseOverVertex(mousePos, vert)) {
+                    graphStruct.removeVertex(vert);
+                    graphArea.removeVertex(vert);
+                    return;
+                }
+            }
         }
     }
 

@@ -55,6 +55,11 @@ public class Graph implements IModel {
         paths.add(path);
         return path;
     }
+    @Override
+    public void removeVertex(IVertex vert) {
+         paths.removeIf(path -> path.getBegin() == vert || path.getEnd() == vert);
+         vertexes.removeIf(old_vert -> old_vert.getName().equals(vert.getName()));
+    }
 
     public double[][] getAdjacencyMatrix() {
         double[][] adjacencyMatrix = new double[vertexes.size()][vertexes.size()];

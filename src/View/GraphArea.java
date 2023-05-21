@@ -44,8 +44,12 @@ public class GraphArea extends JPanel implements IView {
 
     @Override
     public void removeVertex(IVertex vert) {
-        //noinspection SuspiciousMethodCalls
-        verts.remove(vert);
+        paths.removeIf(path -> path.isConnectedWith(vert));
+        DrawableVertex dr_vert = findVertex(vert);
+        verts.remove(dr_vert);
+
+        revalidate();
+        repaint();
     }
 
     @Override
@@ -61,7 +65,6 @@ public class GraphArea extends JPanel implements IView {
 
     @Override
     public void removePath(IPath path) {
-        //noinspection SuspiciousMethodCalls
         paths.remove(path);
     }
 
