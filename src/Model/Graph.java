@@ -3,7 +3,7 @@ package Model;
 import Utility.IPath;
 import Utility.IVertex;
 import Utility.NonOrientedPath;
-import Utility.StaticVertex;
+import Utility.MovableVertex;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -20,7 +20,15 @@ public class Graph implements IModel {
 
     @Override
     public IVertex createVertex(String vert_name, Point vert_pos) {
-        StaticVertex vert = new StaticVertex(vert_name, vert_pos);
+        for (MovableVertex vert : vertexes) {
+            if (vert.getName().equals(vert_name)) {
+                vert.moveTo(vert_pos);
+
+                return null;
+            }
+        }
+
+        MovableVertex vert = new MovableVertex(vert_name, vert_pos);
         vertexes.add(vert);
         return vert;
     }
@@ -58,6 +66,6 @@ public class Graph implements IModel {
         return adjacencyMatrix;
     }
 
-    private final ArrayList<StaticVertex>    vertexes;
+    private final ArrayList<MovableVertex>    vertexes;
     private final ArrayList<NonOrientedPath> paths;
 }

@@ -27,16 +27,19 @@ public class GraphArea extends JPanel implements IView {
 
     @Override
     public void addVertex(IVertex vert) {
-        final int min_c  = 0;
-        final int max_c  = 255 + 1;
+        if (vert != null) {
+            final int min_c  = 0;
+            final int max_c  = 255 + 1;
 
-        Color colour = new Color(rnd.nextInt(max_c - min_c) + min_c,
-                                 rnd.nextInt(max_c - min_c) + min_c,
-                                 rnd.nextInt(max_c - min_c) + min_c);
-        DrawableVertex dr_vert = new DrawableVertex(vert, colour, std_font, std_vert_radius);
-        verts.add(dr_vert);
-        dr_vert.draw((Graphics2D) getGraphics());
+            Color colour = new Color(rnd.nextInt(max_c - min_c) + min_c,
+                                     rnd.nextInt(max_c - min_c) + min_c,
+                                     rnd.nextInt(max_c - min_c) + min_c);
+            DrawableVertex dr_vert = new DrawableVertex(vert, colour, std_font, std_vert_radius);
+            verts.add(dr_vert);
+            dr_vert.draw((Graphics2D) getGraphics());
+        }
         revalidate();
+        repaint();
     }
 
     @Override
@@ -52,6 +55,8 @@ public class GraphArea extends JPanel implements IView {
         if (path != null) {
             paths.add(new DrawablePath(path, colour, std_path_thickness));
         }
+        revalidate();
+        repaint();
     }
 
     @Override
