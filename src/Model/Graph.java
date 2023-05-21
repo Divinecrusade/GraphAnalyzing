@@ -19,6 +19,11 @@ public class Graph implements IModel {
     }
 
     @Override
+    public ArrayList<IPath> getPaths() {
+        return new ArrayList<>(paths);
+    }
+
+    @Override
     public IVertex createVertex(String vert_name, Point vert_pos) {
         for (MovableVertex vert : vertexes) {
             if (vert.getName().equals(vert_name)) {
@@ -61,6 +66,11 @@ public class Graph implements IModel {
          vertexes.removeIf(old_vert -> old_vert.getName().equals(vert.getName()));
     }
 
+    @Override
+    public void deletePath(IPath path) {
+        paths.removeIf(old_path -> old_path.getBegin() == path.getBegin() && old_path.getEnd() == path.getEnd());
+    }
+
     public double[][] getAdjacencyMatrix() {
         double[][] adjacencyMatrix = new double[vertexes.size()][vertexes.size()];
 
@@ -71,6 +81,6 @@ public class Graph implements IModel {
         return adjacencyMatrix;
     }
 
-    private final ArrayList<MovableVertex>    vertexes;
+    private final ArrayList<MovableVertex>   vertexes;
     private final ArrayList<NonOrientedPath> paths;
 }

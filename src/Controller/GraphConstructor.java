@@ -35,6 +35,22 @@ public class GraphConstructor extends MouseAdapter {
     }
 
     protected boolean isCollidedPath(Point pos, IPath path) {
+        final int path_thickness = graphArea.getVisualPathThickness(path) * 2;
+        double dy = path.getEnd().getPos().y - path.getBegin().getPos().y;
+        double dx = path.getEnd().getPos().x - path.getBegin().getPos().x;
+        double dist = Math.sqrt(dx * dx + dy * dy);
+
+        double angle = Math.atan2(dy, dx);
+        double cos = Math.cos(-angle);
+        double sin = Math.sin(-angle);
+
+        double xRot = (pos.x - path.getBegin().getPos().x) * cos - (pos.y - path.getBegin().getPos().y) * sin;
+        double yRot = (pos.x - path.getBegin().getPos().x) * sin + (pos.y - path.getBegin().getPos().y) * cos;
+
+        if (0 <= xRot && xRot <= dist) {
+            return Math.abs(yRot) <= path_thickness;
+        }
+
         return false;
     }
 
@@ -58,6 +74,12 @@ public class GraphConstructor extends MouseAdapter {
                     graphStruct.deleteVertex(vert);
                     graphArea.removeVertex(vert);
                     return;
+                }
+            }
+            for (IPath path : graphStruct.getPaths()) {
+                if (isCollidedPath(mousePos, path)) {
+                    graphStruct.deletePath(path);
+                    graphArea.removePath(path);
                 }
             }
         }

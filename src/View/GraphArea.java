@@ -65,7 +65,10 @@ public class GraphArea extends JPanel implements IView {
 
     @Override
     public void removePath(IPath path) {
-        paths.remove(path);
+        paths.remove(findPath(path));
+
+        revalidate();
+        repaint();
     }
 
     @Override
