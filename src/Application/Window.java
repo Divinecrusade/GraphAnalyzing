@@ -1,6 +1,7 @@
 package Application;
 
 import Controller.GraphConstructor;
+import Controller.GraphControls;
 import Model.Graph;
 import View.ControlPanel;
 import View.GraphArea;
@@ -17,8 +18,10 @@ public class Window extends JFrame {
 
         graphStruct = new Graph();
         graphArea = new GraphArea(new Font("serif", Font.BOLD, 16), 20, 4);
-        graphConstructor = new GraphConstructor(graphStruct, graphArea, graphArea);
         controlPanel = new ControlPanel(getFontMetrics(new Font("serif", Font.PLAIN, 16)), Color.WHITE);
+        graphControls = new GraphControls(graphStruct, graphArea, controlPanel);
+        graphConstructor = new GraphConstructor(graphStruct, graphArea, graphArea, graphControls);
+
         GridBagLayout gbl = new GridBagLayout();
         setLayout(gbl);
         GridBagConstraints gbc = new GridBagConstraints();
@@ -52,5 +55,6 @@ public class Window extends JFrame {
     GraphArea graphArea;
     ControlPanel controlPanel;
     GraphConstructor graphConstructor;
+    GraphControls graphControls;
 
 }

@@ -10,8 +10,8 @@ public class ControlPanel extends ControlPanelContent {
         super();
         super.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-        inputVertBeg = new JComboBox();
-        inputVertEnd = new JComboBox();
+        inputVertBeg = new JComboBox<>();
+        inputVertEnd = new JComboBox<>();
         outputOptimalPath = new JTextField();
         outputOptimalPathLength = new JTextField();
         findOptimalPath = new JButton();

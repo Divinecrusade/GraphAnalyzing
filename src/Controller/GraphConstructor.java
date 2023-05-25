@@ -12,10 +12,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class GraphConstructor extends MouseAdapter {
-    public GraphConstructor(IModel graphStruct, IView graphArea, JComponent controller) {
+    public GraphConstructor(IModel graphStruct, IView graphArea, JComponent controller, IFieldUpdater fieldsHandler) {
         super();
         this.graphStruct = graphStruct;
         this.graphArea = graphArea;
+        this.fieldsHandler = fieldsHandler;
         controller.addMouseListener(this);
         controller.addMouseMotionListener(this);
     }
@@ -66,13 +67,18 @@ public class GraphConstructor extends MouseAdapter {
                 }
             }
             String vert_name = JOptionPane.showInputDialog(new JFrame(),"Enter vertex name");
-            if (vert_name != null && !vert_name.equals("")) graphArea.addVertex(graphStruct.createVertex(vert_name, mousePos));
+            if (vert_name != null && !vert_name.equals("")) {
+                graphArea.addVertex(graphStruct.createVertex(vert_name, mousePos));
+                fieldsHandler.updateVertexesPull();
+            }
         }
         else if (SwingUtilities.isRightMouseButton(e)) {
             for (IVertex vert : graphStruct.getVertexes()) {
                 if (isMouseOverVertex(mousePos, vert)) {
                     graphStruct.deleteVertex(vert);
                     graphArea.removeVertex(vert);
+                    fieldsHandler.updateVertexesPull();
+                    fieldsHandler.resetOutputFields();
                     return;
                 }
             }
@@ -80,6 +86,8 @@ public class GraphConstructor extends MouseAdapter {
                 if (isCollidedPath(mousePos, path)) {
                     graphStruct.deletePath(path);
                     graphArea.removePath(path);
+                    fieldsHandler.updateVertexesPull();
+                    fieldsHandler.resetOutputFields();
                 }
             }
         }
@@ -120,6 +128,8 @@ public class GraphConstructor extends MouseAdapter {
                             else {
                                 graphArea.addPath(graphStruct.createPath(selected_vertex, vert, Double.parseDouble(distance)));
                             }
+                            fieldsHandler.updateVertexesPull();
+                            fieldsHandler.resetOutputFields();
                         }
                     }
                 }
@@ -157,6 +167,7 @@ public class GraphConstructor extends MouseAdapter {
 
     protected final IModel graphStruct;
     protected final IView graphArea;
+    protected final IFieldUpdater fieldsHandler;
     private IVertex selected_vertex = null;
     private IVertex pointed_vertex  = null;
 }

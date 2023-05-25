@@ -53,6 +53,11 @@ public class GraphArea extends JPanel implements IView {
     }
 
     @Override
+    public void removeVertexes() {
+
+    }
+
+    @Override
     public void addPath(IPath path) {
         final Color colour = Color.BLACK;
 
@@ -90,6 +95,11 @@ public class GraphArea extends JPanel implements IView {
 
         revalidate();
         repaint();
+    }
+
+    @Override
+    public void selectPath(IPath path) {
+
     }
 
     @Override
