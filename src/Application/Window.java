@@ -18,7 +18,7 @@ public class Window extends JFrame {
         graphStruct = new Graph();
         graphArea = new GraphArea(new Font("serif", Font.BOLD, 16), 20, 4);
         graphConstructor = new GraphConstructor(graphStruct, graphArea, graphArea);
-        controlPanel = new ControlPanel(getFontMetrics(new Font("serif", Font.PLAIN, 16)), Color.GRAY);
+        controlPanel = new ControlPanel(getFontMetrics(new Font("serif", Font.PLAIN, 16)), Color.WHITE);
         GridBagLayout gbl = new GridBagLayout();
         setLayout(gbl);
         GridBagConstraints gbc = new GridBagConstraints();
@@ -41,7 +41,7 @@ public class Window extends JFrame {
         this.add(controlPanel);
         setVisible(true);
 
-        getContentPane().setBackground(Color.GRAY);
+        getContentPane().setBackground(Color.WHITE);
     }
 
     public static void main(String[] args) {

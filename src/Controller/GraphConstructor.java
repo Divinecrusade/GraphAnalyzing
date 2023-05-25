@@ -3,7 +3,7 @@ package Controller;
 import Model.IModel;
 import Utility.IPath;
 import Utility.IVertex;
-import View.IView;
+import View.IVisualGraph;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -12,7 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class GraphConstructor extends MouseAdapter {
-    public GraphConstructor(IModel graphStruct, IView graphArea, JComponent controller) {
+    public GraphConstructor(IModel graphStruct, IVisualGraph graphArea, JComponent controller) {
         super();
         this.graphStruct = graphStruct;
         this.graphArea = graphArea;
@@ -156,7 +156,7 @@ public class GraphConstructor extends MouseAdapter {
     }
 
     protected final IModel graphStruct;
-    protected final IView graphArea;
+    protected final IVisualGraph graphArea;
     private IVertex selected_vertex = null;
     private IVertex pointed_vertex  = null;
 }
