@@ -5,7 +5,7 @@ import Utility.IVertex;
 
 import java.awt.*;
 
-public interface IVisualGraph {
+public interface IView {
     void addVertex(IVertex vert);
     void removeVertex(IVertex vert);
     void addPath(IPath path);
