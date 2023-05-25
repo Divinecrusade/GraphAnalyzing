@@ -5,7 +5,7 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ControlPanel extends JPanel {
+public class ControlPanel extends ControlPanelContent {
     public ControlPanel(FontMetrics fnt, Color bg_colour) {
         super();
         super.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -108,13 +108,6 @@ public class ControlPanel extends JPanel {
     }
 
     Map<JComponent, JLabel> labelMap;
-    private JComboBox inputVertBeg;
-    private JComboBox inputVertEnd;
-    private JTextField outputOptimalPath;
-    private JTextField outputOptimalPathLength;
-    private JButton findOptimalPath;
-    private JButton deleteGraph;
-
     private JPanel inputsGroup;
     private JPanel outputsGroup;
     private JPanel buttonsGroup;
