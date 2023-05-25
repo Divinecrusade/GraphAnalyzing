@@ -8,6 +8,7 @@ import java.awt.*;
 public interface IView {
     void addVertex(IVertex vert);
     void removeVertex(IVertex vert);
+    void removeVertexes();
     void addPath(IPath path);
     void removePath(IPath path);
 
@@ -15,6 +16,7 @@ public interface IView {
     int getVisualPathThickness(IPath path);
 
     void selectVertex(IVertex vert);
+    void selectPath(IPath path);
 
     void selectTempPath(Point beg, Point end);
 
