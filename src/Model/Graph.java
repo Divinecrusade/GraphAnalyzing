@@ -47,8 +47,25 @@ public class Graph implements IModel {
 
     @Override
     public ArrayList<IPath> getOptimalPath(IVertex begin, IVertex end) {
+        ArrayList<ArrayList<IVertex>> optimal_paths = calculateOptimalPaths(begin, getAdjacencyMatrix());
+        ArrayList<IVertex> optimal_path = null;
 
-        return null;
+        for (var arrList : optimal_paths) {
+            if (arrList.size() > 0 && arrList.get(0) == begin && arrList.get(arrList.size() - 1) == end) {
+                optimal_path = new ArrayList<>(arrList);
+            }
+        }
+        ArrayList<IPath> req_path = new ArrayList<>();
+        for (int i = 0; i != optimal_path.size() - 1; ++i) {
+            for (var path : paths) {
+                if (path.getBegin() == optimal_path.get(i) && path.getEnd() == optimal_path.get(i + 1)) {
+                    req_path.add(path);
+                    break;
+                }
+            }
+        }
+
+        return req_path;
     }
 
     @Override
@@ -106,8 +123,8 @@ public class Graph implements IModel {
         paths.removeIf(old_path -> old_path.getBegin() == path.getBegin() && old_path.getEnd() == path.getEnd());
     }
 
-    private List<List<NonOrientedPath>> getAdjacencyMatrix() {
-        List<List<NonOrientedPath>> adjMatrix = new ArrayList<>();
+    private ArrayList<ArrayList<IPath>> getAdjacencyMatrix() {
+        ArrayList<ArrayList<IPath>> adjMatrix = new ArrayList<>();
 
         for (int i = 0; i != vertexes.size(); ++i) {
             adjMatrix.add(new ArrayList<>());
@@ -116,6 +133,7 @@ public class Graph implements IModel {
         for (NonOrientedPath edge : paths) {
             adjMatrix.get(vertexes.indexOf(edge.getBegin())).add(edge);
         }
+
 
         return adjMatrix;
     }
@@ -129,7 +147,7 @@ public class Graph implements IModel {
         }
     }
 
-    private void calculateOptimalPaths(MovableVertex vertBeg, List<List<NonOrientedPath>> adjMatrix) {
+    private ArrayList<ArrayList<IVertex>> calculateOptimalPaths(IVertex vertBeg, ArrayList<ArrayList<IPath>> adjMatrix) {
         int source_index = vertexes.indexOf(vertBeg);
         int n = vertexes.size();
 
@@ -164,7 +182,7 @@ public class Graph implements IModel {
             int u = vertexes.indexOf(node.vert);
 
             // делаем для каждого соседа `v` из `u`
-            for (NonOrientedPath edge: adjMatrix.get(u))
+            for (IPath edge: adjMatrix.get(u))
             {
                 int v = vertexes.indexOf(edge.getEnd());
                 double weight = edge.getDistance();
@@ -182,28 +200,24 @@ public class Graph implements IModel {
             done[u] = true;
         }
 
-        List<Integer> route = new ArrayList<>();
+        ArrayList<Integer> route = new ArrayList<>();
+        ArrayList<ArrayList<IVertex>> optimalPaths = new ArrayList<>();
 
         for (int i = 0; i < n; i++)
         {
+            optimalPaths.add(new ArrayList<>());
             if (i != source_index && dist.get(i) != Double.MAX_VALUE)
             {
                 getRoute(prev, i, route);
-                System.out.printf("Path (%d —> %d): Minimum cost = %f, Route = %s\n", source_index, i, dist.get(i), route);
+                for (var r : route) {
+                    optimalPaths.get(i).add(vertexes.get(r));
+                }
                 route.clear();
             }
         }
+
+        return optimalPaths;
     }
-
-    /*public double[][] getAdjacencyMatrix() {
-        double[][] adjacencyMatrix = new double[vertexes.size()][vertexes.size()];
-
-        for (NonOrientedPath path : paths) {
-            adjacencyMatrix[vertexes.indexOf(path.getBegin())][vertexes.indexOf(path.getEnd())] = path.getDistance();
-        }
-
-        return adjacencyMatrix;
-    }*/
 
     private final ArrayList<MovableVertex>   vertexes;
     private final ArrayList<NonOrientedPath> paths;

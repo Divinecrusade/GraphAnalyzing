@@ -35,7 +35,7 @@ public class GraphControls implements IFieldUpdater {
     }
 
     static private class FindOptimalPathHandler implements ActionListener {
-        public FindOptimalPathHandler(GraphControls graphControls, ComboBoxModel<String> pullOfVertBeg, ComboBoxModel<String> pullOfVertEnd, AbstractButton button, JTextComponent outputPath, JTextComponent outputPathLength) {
+        public FindOptimalPathHandler(GraphControls graphControls, JComboBox<String> pullOfVertBeg, JComboBox<String> pullOfVertEnd, AbstractButton button, JTextComponent outputPath, JTextComponent outputPathLength) {
             this.graphControls = graphControls;
             this.pullOfVertBeg = pullOfVertBeg;
             this.pullOfVertEnd = pullOfVertEnd;
@@ -60,14 +60,14 @@ public class GraphControls implements IFieldUpdater {
                 graphControls.graphArea.selectVertex(path.getBegin());
                 graphControls.graphArea.selectPath(path);
             }
-            optimalPathStr = optimalPathStr.replaceFirst("→", "");
+            optimalPathStr = optimalPathStr.concat(end.getName());
 
             outputPath.setText(optimalPathStr);
             outputPathLength.setText(Double.toString(optimalLength));
         }
 
-        private final ComboBoxModel<String> pullOfVertBeg;
-        private final ComboBoxModel<String> pullOfVertEnd;
+        private final JComboBox<String> pullOfVertBeg;
+        private final JComboBox<String> pullOfVertEnd;
         private final JTextComponent outputPath;
         private final JTextComponent outputPathLength;
 
@@ -99,8 +99,8 @@ public class GraphControls implements IFieldUpdater {
         outputOptimalPathLength = controlPanelContent.outputOptimalPathLength;
 
         new FindOptimalPathHandler(this,
-                controlPanelContent.inputVertBeg.getModel(),
-                controlPanelContent.inputVertEnd.getModel(),
+                controlPanelContent.inputVertBeg,
+                controlPanelContent.inputVertEnd,
                 controlPanelContent.findOptimalPath,
                 controlPanelContent.outputOptimalPath,
                 controlPanelContent.outputOptimalPathLength);
