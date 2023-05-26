@@ -13,7 +13,9 @@ public class ControlPanel extends ControlPanelContent {
         inputVertBeg = new JComboBox<>();
         inputVertEnd = new JComboBox<>();
         outputOptimalPath = new JTextField();
+        outputOptimalPath.setEnabled(false);
         outputOptimalPathLength = new JTextField();
+        outputOptimalPathLength.setEnabled(false);
         findOptimalPath = new JButton();
         deleteGraph = new JButton();
 
