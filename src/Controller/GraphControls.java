@@ -102,6 +102,8 @@ public class GraphControls implements IFieldUpdater {
         public void actionPerformed(ActionEvent e) {
             graphControls.graph.deleteVertexes();
             graphControls.graphArea.removeVertexes();
+            graphControls.resetOutputFields();
+            graphControls.updateVertexesPull();
         }
 
         private final GraphControls graphControls;

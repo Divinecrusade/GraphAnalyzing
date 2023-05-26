@@ -54,7 +54,12 @@ public class GraphArea extends JPanel implements IView {
 
     @Override
     public void removeVertexes() {
+        paths.clear();
+        selected_verts.clear();
+        verts.clear();
 
+        revalidate();
+        repaint();
     }
 
     @Override
