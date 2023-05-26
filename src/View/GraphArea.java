@@ -161,10 +161,10 @@ public class GraphArea extends JPanel implements IView {
     public void paintComponent(Graphics gfx) {
         super.paintComponent(gfx);
         Graphics2D gfx2D = (Graphics2D) gfx;
+        gfx2D.setStroke(new BasicStroke(std_path_thickness));
 
         if (tempPathBeg != null && tempPathEnd != null) {
             gfx2D.setColor(selection_colour);
-            gfx2D.setStroke(new BasicStroke(std_path_thickness));
             gfx2D.drawLine(tempPathBeg.x, tempPathBeg.y, tempPathEnd.x, tempPathEnd.y);
         }
 

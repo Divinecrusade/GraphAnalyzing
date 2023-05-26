@@ -58,26 +58,38 @@ public class GraphControls implements IFieldUpdater {
             List<IPath> optimalPath = graphControls.graph.getOptimalPath(beg, end);
             List<IPath> paths = graphControls.graph.getPaths();
 
-            double optimalLength = 0d;
-            String optimalPathStr = "";
-            for (IPath path : optimalPath) {
-                optimalLength += path.getDistance();
-                optimalPathStr = optimalPathStr.concat(path.getBegin().getName());
-                optimalPathStr = optimalPathStr.concat("→");
+            double optimalLength;
+            String optimalPathStr;
+            if (optimalPath.size() > 0) {
+                optimalLength = 0d;
+                optimalPathStr = "";
+                for (IPath path : optimalPath) {
+                    optimalLength += path.getDistance();
+                    optimalPathStr = optimalPathStr.concat(path.getBegin().getName());
+                    optimalPathStr = optimalPathStr.concat("→");
 
-                graphControls.graphArea.selectVertex(graphControls.graph.getVertex(path.getBegin().getName()));
+                    graphControls.graphArea.selectVertex(graphControls.graph.getVertex(path.getBegin().getName()));
 
-                for (IPath cur_path : paths) {
-                    if (path.getBegin().getName().equals(cur_path.getBegin().getName()) && path.getEnd().getName().equals(cur_path.getEnd().getName()) ||
-                        path.getBegin().getName().equals(cur_path.getEnd().getName()) && path.getEnd().getName().equals(cur_path.getBegin().getName()))
-                    {
-                        graphControls.graphArea.selectPath(cur_path);
-                        break;
+                    for (IPath cur_path : paths) {
+                        if (path.getBegin().getName().equals(cur_path.getBegin().getName()) && path.getEnd().getName().equals(cur_path.getEnd().getName()) ||
+                            path.getBegin().getName().equals(cur_path.getEnd().getName()) && path.getEnd().getName().equals(cur_path.getBegin().getName()))
+                        {
+                            graphControls.graphArea.selectPath(cur_path);
+                            break;
+                        }
                     }
                 }
+                graphControls.graphArea.selectVertex(end);
+                optimalPathStr = optimalPathStr.concat(end.getName());
+            } else if (beg.getName().equals(end.getName())) {
+                optimalLength = 0d;
+                graphControls.graphArea.selectVertex(end);
+                optimalPathStr = end.getName();
             }
-            graphControls.graphArea.selectVertex(end);
-            optimalPathStr = optimalPathStr.concat(end.getName());
+            else {
+                optimalLength = Double.MAX_VALUE;
+                optimalPathStr = "Не существует";
+            }
 
             outputPath.setText(optimalPathStr);
             outputPathLength.setText(Double.toString(optimalLength));
