@@ -103,11 +103,6 @@ public class Graph implements IModel {
             }
         }
 
-//        int n = tmp_stack.size();
-//        for (int i = 0; i != n; ++i) {
-//            optimal_path.add(tmp_stack.pop());
-//        }
-
         return optimal_path;
     }
 
@@ -147,8 +142,6 @@ public class Graph implements IModel {
     public IPath createPath(IVertex beg, IVertex end) {
         NonOrientedPath path = new NonOrientedPath(beg, end);
         paths.add(path);
-
-        NonOrientedPath mirror_path = new NonOrientedPath(end, beg, path.getDistance());
 
         return path;
     }
