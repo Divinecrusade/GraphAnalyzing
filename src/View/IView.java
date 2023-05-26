@@ -23,5 +23,7 @@ public interface IView {
     void deselectVertexes();
 
     void deselectVertex(IVertex vert);
+
+    void deselectPaths();
     void deselectTempPath();
 }

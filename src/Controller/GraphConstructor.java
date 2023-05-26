@@ -138,6 +138,7 @@ public class GraphConstructor extends MouseAdapter {
             selected_vertex = null;
             pointed_vertex  = null;
             graphArea.deselectVertexes();
+            graphArea.deselectPaths();
             graphArea.deselectTempPath();
         }
     }

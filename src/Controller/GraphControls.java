@@ -32,6 +32,9 @@ public class GraphControls implements IFieldUpdater {
         DefaultComboBoxModel<String> new_model_2 = new DefaultComboBoxModel<>( vertexes_names_2 );
         vertBegPull.setModel(new_model_1);
         vertEndPull.setModel(new_model_2);
+
+        graphArea.deselectVertexes();
+        graphArea.deselectPaths();
     }
 
     static private class FindOptimalPathHandler implements ActionListener {
@@ -46,20 +49,34 @@ public class GraphControls implements IFieldUpdater {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            graphControls.graphArea.deselectVertexes();
+            graphControls.graphArea.deselectPaths();
+
             IVertex beg = graphControls.graph.getVertex((String) pullOfVertBeg.getSelectedItem());
             IVertex end = graphControls.graph.getVertex((String) pullOfVertEnd.getSelectedItem());
 
             List<IPath> optimalPath = graphControls.graph.getOptimalPath(beg, end);
+            List<IPath> paths = graphControls.graph.getPaths();
 
-            double optimalLength = 0;
+            double optimalLength = 0d;
             String optimalPathStr = "";
             for (IPath path : optimalPath) {
                 optimalLength += path.getDistance();
                 optimalPathStr = optimalPathStr.concat(path.getBegin().getName());
                 optimalPathStr = optimalPathStr.concat("→");
-                graphControls.graphArea.selectVertex(path.getBegin());
-                graphControls.graphArea.selectPath(path);
+
+                graphControls.graphArea.selectVertex(graphControls.graph.getVertex(path.getBegin().getName()));
+
+                for (IPath cur_path : paths) {
+                    if (path.getBegin().getName().equals(cur_path.getBegin().getName()) && path.getEnd().getName().equals(cur_path.getEnd().getName()) ||
+                        path.getBegin().getName().equals(cur_path.getEnd().getName()) && path.getEnd().getName().equals(cur_path.getBegin().getName()))
+                    {
+                        graphControls.graphArea.selectPath(cur_path);
+                        break;
+                    }
+                }
             }
+            graphControls.graphArea.selectVertex(end);
             optimalPathStr = optimalPathStr.concat(end.getName());
 
             outputPath.setText(optimalPathStr);

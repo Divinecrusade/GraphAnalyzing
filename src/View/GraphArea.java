@@ -59,10 +59,8 @@ public class GraphArea extends JPanel implements IView {
 
     @Override
     public void addPath(IPath path) {
-        final Color colour = Color.BLACK;
-
         if (path != null) {
-            paths.add(new DrawablePath(path, colour, std_path_thickness));
+            paths.add(new DrawablePath(path, std_path_color, std_path_thickness));
         }
         revalidate();
         repaint();
@@ -99,7 +97,13 @@ public class GraphArea extends JPanel implements IView {
 
     @Override
     public void selectPath(IPath path) {
+        DrawablePath dr_path = findPath(path);
+        if (dr_path != null) {
+            dr_path.colour = selection_colour;
+        }
 
+        revalidate();
+        repaint();
     }
 
     @Override
@@ -123,6 +127,17 @@ public class GraphArea extends JPanel implements IView {
     public void deselectVertex(IVertex vert) {
         DrawableVertex dr_vert = findVertex(vert);
         selected_verts.remove(dr_vert);
+
+        revalidate();
+        repaint();
+    }
+
+    @Override
+    public void deselectPaths() {
+        for (DrawablePath path : paths) {
+            path.colour = std_path_color;
+        }
+        selected_verts.clear();
 
         revalidate();
         repaint();
@@ -184,6 +199,7 @@ public class GraphArea extends JPanel implements IView {
     private final int std_vert_radius;
     private final int std_path_thickness;
     private final Color selection_colour = Color.RED;
+    private final Color std_path_color = Color.BLACK;
 
     private Point tempPathBeg = null;
     private Point tempPathEnd = null;

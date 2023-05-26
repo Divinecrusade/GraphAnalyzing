@@ -8,7 +8,6 @@ import Utility.NonOrientedPath;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Stack;
 
 public class Graph implements IModel {
     public Graph() {
@@ -67,26 +66,47 @@ public class Graph implements IModel {
 
         d_graph = Utility.Dijkstra.Graph.calculateShortestPathFromSource(d_graph, nodeA);
         ArrayList<IPath> optimal_path = new ArrayList<>();
-        Stack<IPath> tmp_stack = new Stack<>();
         for (Node node : d_graph.getNodes()) {
             if (node.getName().equals(end.getName())) {
+                nodeA = null;
                 for (Node sub_node : node.getShortestPath()) {
+                    if (nodeA == null) {
+                        nodeA = sub_node;
+                        continue;
+                    }
+                    double dist = 0d;
                     for (IPath path : paths) {
-                        if (path.getBegin().getName().equals(sub_node.getName()) && path.getEnd().getName().equals(node.getName())) {
-                            tmp_stack.push(path);
-                        }
-                        else if (path.getBegin().getName().equals(node.getName()) && path.getEnd().getName().equals(sub_node.getName())) {
-                            tmp_stack.push(new NonOrientedPath(path.getEnd(), path.getBegin(), path.getDistance()));
+                        if (path.getBegin().getName().equals(nodeA.getName()) && path.getEnd().getName().equals(sub_node.getName()) ||
+                            path.getBegin().getName().equals(sub_node.getName()) && path.getEnd().getName().equals(nodeA.getName()))
+                        {
+                            dist = path.getDistance();
+                            break;
                         }
                     }
+                    optimal_path.add(new NonOrientedPath(new MovableVertex(nodeA.getName(), new Point(0, 0)),
+                                     new MovableVertex(sub_node.getName(), new Point(0, 0)), dist));
+                    nodeA = sub_node;
+                }
+                if (nodeA != null) {
+                    double dist = 0d;
+                    for (IPath path : paths) {
+                        if (path.getBegin().getName().equals(nodeA.getName()) && path.getEnd().getName().equals(end.getName()) ||
+                            path.getBegin().getName().equals(end.getName()) && path.getEnd().getName().equals(nodeA.getName()))
+                        {
+                            dist = path.getDistance();
+                            break;
+                        }
+                    }
+                    optimal_path.add(new NonOrientedPath(new MovableVertex(nodeA.getName(), new Point(0, 0)),
+                                                         new MovableVertex(node.getName(), new Point(0, 0)), dist));
                 }
             }
         }
 
-        int n = tmp_stack.size();
-        for (int i = 0; i != n; ++i) {
-            optimal_path.add(tmp_stack.pop());
-        }
+//        int n = tmp_stack.size();
+//        for (int i = 0; i != n; ++i) {
+//            optimal_path.add(tmp_stack.pop());
+//        }
 
         return optimal_path;
     }
